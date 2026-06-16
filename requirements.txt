@@ -1,0 +1,40 @@
+# ===== TraceVision Dependencies =====
+# Install: pip install -r requirements.txt
+# GPU (CUDA) is required for model inference & training.
+# PyTorch: install from https://pytorch.org if the default version doesn't match your CUDA.
+
+# ===== Deep Learning Framework =====
+torch>=2.0.0
+torchvision>=0.15.0
+numpy>=1.24.0
+
+# ===== Image Processing =====
+Pillow>=10.0.0
+opencv-python>=4.8.0
+scikit-image>=0.21.0
+
+# ===== TraceVision Core (model architecture) =====
+diffusers>=0.24.0
+basicsr>=1.4.0
+einops>=0.7.0
+lpips>=0.1.4
+kornia>=0.7.0
+
+# ===== Training Utilities (only needed for re-training) =====
+lmdb>=1.4.0
+PyYAML>=6.0
+tensorboardX>=2.6.0
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# ===== Web API (FastAPI backend) =====
+fastapi>=0.104.0
+uvicorn[standard]>=0.24.0
+pydantic>=2.5.0
+python-multipart>=0.0.6
+
+# ===== HTTP Client (testing & external services) =====
+requests>=2.31.0
+
+# ===== Testing =====
+pytest>=7.4.0

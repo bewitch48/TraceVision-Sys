@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
+    --radius: 0.25rem;
+  }
+
+  body {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: #FFFFFF;
+    color: #1E293B;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', 'Inter', sans-serif;
+    font-weight: 600;
+    color: #1E293B;
+  }
+
+  .font-display {
+    font-family: 'Space Grotesk', 'Noto Sans SC', 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium;
+    @apply bg-[#2563EB] text-white rounded-sm;
+    @apply hover:bg-[#1D4ED8] transition-all duration-200;
+    @apply shadow-[0_1px_3px_rgba(0,0,0,0.05)];
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-2.5 text-sm font-medium;
+    @apply bg-white text-[#2563EB] rounded-sm border border-[#2563EB];
+    @apply hover:bg-[#EFF6FF] transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium;
+    @apply text-[#475569] rounded-sm;
+    @apply hover:bg-[#F1F5F9] hover:text-[#1E293B] transition-all duration-200;
+  }
+
+  .card-surface {
+    @apply bg-white rounded-lg border border-[#E2E8F0];
+    @apply shadow-[0_1px_3px_rgba(0,0,0,0.05)];
+  }
+
+  .sidebar-item {
+    @apply flex items-center gap-3 px-4 py-3 text-sm rounded-md;
+    @apply text-[#475569] hover:bg-[#F1F5F9] hover:text-[#1E293B];
+    @apply transition-all duration-200 cursor-pointer;
+  }
+
+  .sidebar-item.active {
+    @apply bg-[#EFF6FF] text-[#2563EB] font-medium;
+  }
+
+  .input-field {
+    @apply w-full px-3 py-2.5 text-sm bg-white border border-[#E2E8F0] rounded-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB];
+    @apply transition-all duration-200;
+  }
+
+  .section-title {
+    @apply text-lg font-semibold text-[#1E293B] mb-1;
+  }
+
+  .section-subtitle {
+    @apply text-sm text-[#94A3B8];
+  }
+
+  .step-dot {
+    @apply w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium;
+    @apply border-2 transition-all duration-300;
+  }
+
+  .step-dot.completed {
+    @apply bg-[#10B981] border-[#10B981] text-white;
+  }
+
+  .step-dot.current {
+    @apply bg-[#2563EB] border-[#2563EB] text-white;
+  }
+
+  .step-dot.pending {
+    @apply bg-white border-[#CBD5E1] text-[#94A3B8];
+  }
+
+  .upload-zone {
+    @apply border-2 border-dashed border-[#CBD5E1] rounded-xl;
+    @apply flex flex-col items-center justify-center gap-3;
+    @apply hover:border-[#3B82F6] hover:bg-[#EFF6FF] transition-all duration-300;
+    @apply cursor-pointer;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes drawBox {
+    to { stroke-dashoffset: 0; }
+  }
+
+  @keyframes pulse-error {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  /* ===== bit 单元格 ===== */
+  .bit-cell {
+    @apply w-4 h-4 rounded-sm transition-all duration-300;
+  }
+  .bit-cell.zero {
+    @apply bg-[#E2E8F0];
+  }
+  .bit-cell.one {
+    @apply bg-[#2563EB];
+  }
+  .bit-cell.error {
+    @apply bg-[#EF4444];
+    animation: pulse-error 1s ease-in-out infinite;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 2px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
+}
