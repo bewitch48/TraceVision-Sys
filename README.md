@@ -1,6 +1,3 @@
-<div align="center">
-<img src="./asserts/Logo.png" alt="TraceVision Logo" width="150" height="150">
-
 # TraceVision — AIGC 数字水印与内容溯源系统
 
 ### Versatile Image Watermarking for Tamper Localization and Copyright Protection
@@ -32,7 +29,7 @@ TraceVision 是一个面向 **AIGC 内容溯源** 的数字水印与取证系统
 ### 技术亮点
 
 * **可逆神经网络 (INN)** 实现图像的可逆变换
-* **Bit Encoder/Decoder** (`DW\_Encoder` / `DW\_Decoder`) 实现 64-bit 消息隐藏
+* **Bit Encoder/Decoder** (`DW\\\_Encoder` / `DW\\\_Decoder`) 实现 64-bit 消息隐藏
 * **Predictive Module** (ResBlocks + TransformerBlocks) 实现秘密信息恢复
 * **Prompt Generation Module** 自适应特征增强
 * 集成 Stable Diffusion pipeline 用于合成篡改评估
@@ -52,11 +49,11 @@ TraceVision/
 │   ├── data/                    # 数据集加载器 (COCO / TestSet)
 │   ├── models/                  # 模型定义 + 训练脚本
 │   │   ├── modules/             # INN / Transformer / Loss / DWT
-│   │   └── bitnetwork/          # Bit Encoder \& Decoder
+│   │   └── bitnetwork/          # Bit Encoder \\\& Decoder
 │   ├── options/                 # YAML 配置 (train / test)
 │   ├── utils/                   # 工具函数 (PSNR / SSIM / JPEG / Logging)
 │   ├── train.py                 # Stage-2 训练 (图像恢复)
-│   ├── train\_bit.py             # Stage-1 训练 (Bit 编解码)
+│   ├── train\\\_bit.py             # Stage-1 训练 (Bit 编解码)
 │   ├── test.py                  # CLI 推理脚本
 │   └── maskextract.py           # 后处理：提取篡改区域 mask
 ├── front/app/                   # React 前端
@@ -92,7 +89,7 @@ TraceVision/
 pip install -r requirements.txt
 
 # 前端依赖
-cd front/app \&\& npm install
+cd front/app \\\&\\\& npm install
 ```
 
 ### 2\. 下载预训练模型
@@ -157,12 +154,12 @@ npx vite --host 0.0.0.0 --port 3000
 
 |模块|方法|端点|
 |-|-|-|
-|版权管理|`GET / POST / DELETE`|`/api/logo/\*`|
+|版权管理|`GET / POST / DELETE`|`/api/logo/\\\*`|
 |水印嵌入|`POST`|`/api/watermark/embed`|
 |对比分析|`POST`|`/api/watermark/compare`|
 |攻击模拟|`POST`|`/api/tamper/{type}`|
 |取证提取|`POST`|`/api/extract`|
-|系统配置|`GET`|`/api/config/\*`|
+|系统配置|`GET`|`/api/config/\\\*`|
 |AI 报告|`POST`|`/api/report/generate`|
 
 \---
@@ -171,16 +168,16 @@ npx vite --host 0.0.0.0 --port 3000
 
 ```bash
 # 后端单元测试
-cd code \&\& python -m pytest tests/test\_backend.py -v
+cd code \\\&\\\& python -m pytest tests/test\\\_backend.py -v
 
 # 后端 E2E 测试（需先启动后端服务）
-cd code \&\& python -m pytest tests/test\_e2e.py -v
+cd code \\\&\\\& python -m pytest tests/test\\\_e2e.py -v
 
 # 前端测试
-cd front/app \&\& npx vitest run
+cd front/app \\\&\\\& npx vitest run
 
 # 一键运行全部
-cd code \&\& python run\_tests.py
+cd code \\\&\\\& python run\\\_tests.py
 ```
 
 \---
@@ -191,23 +188,23 @@ cd code \&\& python run\_tests.py
 cd code
 
 # 高保真模型
-python test.py -opt options/test\_tracevision.yml --ckpt ../checkpoints/clean.pth
+python test.py -opt options/test\\\_tracevision.yml --ckpt ../checkpoints/clean.pth
 python maskextract.py --threshold 0.2
 
 # 抗退化模型
-python test.py -opt options/test\_tracevision.yml --ckpt ../checkpoints/degrade.pth
+python test.py -opt options/test\\\_tracevision.yml --ckpt ../checkpoints/degrade.pth
 python maskextract.py --threshold 0.4
 ```
 
-输出文件格式（保存在 `results/test\_age-set/`）：
+输出文件格式（保存在 `results/test\\\_age-set/`）：
 
 |后缀|含义|
 |-|-|
-|`\_SR.png`|恢复的主图像|
-|`\_SR\_h.png`|恢复的秘密图像（篡改定位参考）|
-|`\_GT.png`|原始主图像|
-|`\_LR.png`|含水印图 (stego)|
-|`\_LRGT.png`|原始秘密图像|
+|`\\\_SR.png`|恢复的主图像|
+|`\\\_SR\\\_h.png`|恢复的秘密图像（篡改定位参考）|
+|`\\\_GT.png`|原始主图像|
+|`\\\_LR.png`|含水印图 (stego)|
+|`\\\_LRGT.png`|原始秘密图像|
 
 \---
 
@@ -219,21 +216,21 @@ python maskextract.py --threshold 0.4
 
 ```bash
 cd code
-python train\_bit.py -opt options/train\_tracevision\_bit.yml
+python train\\\_bit.py -opt options/train\\\_tracevision\\\_bit.yml
 ```
 
 ### Stage 2：训练图像恢复模块
 
-1. 编辑 `options/train\_tracevision\_image.yml`，将 `path.pretrain\_model\_G` 指向 Stage-1 的 checkpoint
+1. 编辑 `options/train\\\_tracevision\\\_image.yml`，将 `path.pretrain\\\_model\\\_G` 指向 Stage-1 的 checkpoint
 2. 运行：
 
 ```bash
-python train.py -opt options/train\_tracevision\_image.yml
+python train.py -opt options/train\\\_tracevision\\\_image.yml
 ```
 
 ### 数据集准备
 
-下载 [COCO2017 train2017](http://images.cocodataset.org/zips/train2017.zip)，修改配置中的 `data\_path` 和 `txt\_path`。
+下载 [COCO2017 train2017](http://images.cocodataset.org/zips/train2017.zip)，修改配置中的 `data\\\_path` 和 `txt\\\_path`。
 
 \---
 
