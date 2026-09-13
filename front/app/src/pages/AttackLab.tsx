@@ -368,7 +368,7 @@ export default function AttackLab() {
                     </div>
                   )}
                   {/* 隐藏的文件输入，必须始终渲染 */}
-                  <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
+                  <input ref={fileInputRef} id="file-upload" name="file-upload" type="file" accept="image/*" className="hidden" onChange={handleUpload} aria-label="上传图片" />
                 </div>
               </div>
 
@@ -451,6 +451,8 @@ export default function AttackLab() {
                   value={gaussianSigma}
                   onChange={(e) => setGaussianSigma(Number(e.target.value))}
                   className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none cursor-pointer accent-[#2563EB]"
+                  id="gaussian-slider" name="gaussian-slider"
+                  aria-label="噪声强度"
                 />
                 <div className="flex justify-between text-[10px] text-[#94A3B8] mt-1">
                   <span>1</span>
@@ -472,6 +474,8 @@ export default function AttackLab() {
                   value={jpegQuality}
                   onChange={(e) => setJpegQuality(Number(e.target.value))}
                   className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none cursor-pointer accent-[#2563EB]"
+                  id="jpeg-quality-slider" name="jpeg-quality-slider"
+                  aria-label="JPEG压缩质量"
                 />
                 <div className="flex justify-between text-[10px] text-[#94A3B8] mt-1">
                   <span>50（高压缩）</span>

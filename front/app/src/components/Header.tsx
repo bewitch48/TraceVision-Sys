@@ -28,7 +28,7 @@ export default function Header() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#94A3B8]" />
             <input type="text" placeholder="搜索..." className="pl-9 pr-4 py-2 text-sm bg-[#F8FAFC] border border-[#E2E8F0] rounded-md w-48 focus:outline-none focus:ring-2 focus:ring-[#2563EB]/20 focus:border-[#2563EB]" />
           </div>
-          <button className="relative p-2 text-[#475569] hover:bg-[#F1F5F9] rounded-md transition-colors">
+          <button className="relative p-2 text-[#475569] hover:bg-[#F1F5F9] rounded-md transition-colors" aria-label="打开通知" title="通知">
             <Bell className="w-5 h-5" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-[#EF4444] rounded-full" />
           </button>

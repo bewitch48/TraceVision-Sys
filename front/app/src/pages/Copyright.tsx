@@ -230,7 +230,7 @@ export default function CopyrightPage() {
                   ) : (
                     <><Upload className="w-5 h-5 text-[#CBD5E1]" /><span className="text-xs text-[#94A3B8]">点击选择 Logo 图片</span></>
                   )}
-                  <input ref={logoInputRef} type="file" accept="image/*" className="hidden" onChange={(e) => setNewLogoFile(e.target.files?.[0] || null)} />
+                  <input ref={logoInputRef} id="logo-upload" name="logo-upload" type="file" accept="image/*" className="hidden" onChange={(e) => setNewLogoFile(e.target.files?.[0] || null)} aria-label="上传Logo" />
                 </div></div>
               <div className="flex items-center justify-end gap-3 mt-6">
                 <button onClick={() => setShowModal(false)} className="btn-ghost text-xs">取消</button>

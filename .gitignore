@@ -12,6 +12,11 @@ build/
 checkpoints/
 logos/
 *.pth
+*.pt
+*.ckpt
+*.safetensors
+*.onnx
+*.bin
 logo_database.json
 results/
 experiments/

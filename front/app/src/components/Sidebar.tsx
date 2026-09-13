@@ -51,7 +51,7 @@ export default function Sidebar() {
       </div>
 
       {/* Toggle */}
-      <button onClick={toggleSidebar} className="absolute -right-3 top-20 w-6 h-6 bg-white border border-[#E2E8F0] rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow z-50">
+      <button onClick={toggleSidebar} className="absolute -right-3 top-20 w-6 h-6 bg-white border border-[#E2E8F0] rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow z-50" aria-label="折叠侧边栏" title="折叠侧边栏">
         {sidebarCollapsed ? <ChevronRight className="w-3 h-3 text-[#475569]" /> : <ChevronLeft className="w-3 h-3 text-[#475569]" />}
       </button>
 

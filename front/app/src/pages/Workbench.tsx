@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from 'react';
 import { useStore } from '@/hooks/useStore';
 import MarqueeText from '@/components/MarqueeText';
 import CameraCapture from '@/components/CameraCapture';
-import { Upload, Shield, SlidersHorizontal, Play, Download, FlaskConical, ChevronDown, ChevronUp, RefreshCw, Image, Camera } from 'lucide-react';
+import { Upload, Shield, SlidersHorizontal, Play, Download, FlaskConical, ChevronDown, ChevronUp, RefreshCw, Image as ImageIcon, Camera } from 'lucide-react';
 import { embedWatermark, compareImages, toImageUrl, createLogo as apiCreateLogo } from '@/services/api';
 
 const STEPS = ['选择版权', '上传媒体', '嵌入水印', '质量分析'];
@@ -192,7 +192,7 @@ export default function Workbench() {
         <div className="col-span-3">
           <div className="card-surface p-4">
             <h3 className="text-sm font-semibold text-[#1E293B] mb-4 flex items-center gap-2"><Shield className="w-4 h-4 text-[#2563EB]" />选择版权归属</h3>
-            <select value={selectedCopyrightId ?? ''} onChange={(e) => setSelectedCopyrightId(Number(e.target.value))} className="input-field mb-4">
+            <select id="copyright-select" name="copyright-select" value={selectedCopyrightId ?? ''} onChange={(e) => setSelectedCopyrightId(Number(e.target.value))} className="input-field mb-4" aria-label="选择版权归属">
               {copyrights.map((c) => <option key={c.id} value={c.id}>ID:{c.id} | {c.company}</option>)}
             </select>
             {selectedCopyright && (
@@ -215,12 +215,12 @@ export default function Workbench() {
                   ) : (
                     <><Upload className="w-5 h-5 text-[#94A3B8]" /><span className="text-xs text-[#94A3B8]">点击上传 Logo</span></>
                   )}
-                  <input ref={quickLogoRef} type="file" accept="image/*" className="hidden" onChange={(e) => setNewLogoFile(e.target.files?.[0] || null)} />
+                  <input ref={quickLogoRef} id="quick-logo-upload" name="quick-logo-upload" type="file" accept="image/*" className="hidden" onChange={(e) => setNewLogoFile(e.target.files?.[0] || null)} aria-label="上传Logo" />
                 </div>
                 <button onClick={handleQuickCreate} className="btn-primary w-full text-xs">新建版权</button>
               </div>
             )}
-          <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleFileUpload} />
+          <input ref={fileInputRef} id="file-upload" name="file-upload" type="file" accept="image/*" className="hidden" onChange={handleFileUpload} aria-label="上传图片" />
           </div>
         </div>
 
@@ -243,7 +243,7 @@ export default function Workbench() {
 
             {!uploadedImage ? (
               <div className="upload-zone h-80 flex-col gap-3">
-                <Image className="w-8 h-8 text-[#CBD5E1]" />
+                <ImageIcon className="w-8 h-8 text-[#CBD5E1]" />
                 <div className="text-sm text-[#475569] font-medium">点击或拖拽上传图片</div>
                 <div className="text-xs text-[#94A3B8]">JPG、PNG 格式，最大 5MB</div>
                 <div className="flex items-center gap-2 mt-2">
@@ -279,19 +279,19 @@ export default function Workbench() {
             <div className="space-y-5">
               <div>
                 <label className="text-xs text-[#475569] mb-1.5 block">模型选择</label>
-                <select value={modelType} onChange={(e) => setModelType(e.target.value)} className="input-field">
+                <select id="model-select" name="model-select" value={modelType} onChange={(e) => setModelType(e.target.value)} className="input-field" aria-label="选择水印模型">
                   <option value="clean">Clean Model（高保真）</option>
                   <option value="degrade">Degrade Model（抗攻击）</option>
                 </select>
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5"><label className="text-xs text-[#475569]">水印强度</label><span className="text-xs font-mono text-[#2563EB]">{strength}</span></div>
-                <input type="range" min={1} max={10} value={strength} onChange={(e) => setStrength(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" />
+                <input id="strength-slider" name="strength-slider" type="range" min={1} max={10} value={strength} onChange={(e) => setStrength(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" aria-label="水印强度" />
                 <div className="flex justify-between text-[10px] text-[#94A3B8] mt-1"><span>弱</span><span>强</span></div>
               </div>
               <div>
                 <label className="text-xs text-[#475569] mb-1.5 block">消息长度</label>
-                <div className="input-field bg-[#F8FAFC] text-[#94A3B8]">64bit（固定）</div>
+                <div id="msg-length" name="msg-length" className="input-field bg-[#F8FAFC] text-[#94A3B8]" aria-label="消息长度：64bit（固定）">64bit（固定）</div>
               </div>
               <div>
                 <label className="text-xs text-[#475569] mb-1.5 block">输出格式</label>

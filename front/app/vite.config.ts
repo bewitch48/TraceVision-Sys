@@ -6,6 +6,14 @@ import { defineConfig } from "vite"
 export default defineConfig({
   base: './',
   plugins: [react()],
+  optimizeDeps: {
+    include: ['recharts'],
+  },
+  build: {
+    commonjsOptions: {
+      include: [/recharts/, /node_modules/],
+    },
+  },
   server: {
     port: 3000,
     // API 代理到后端 FastAPI（端口 8000）

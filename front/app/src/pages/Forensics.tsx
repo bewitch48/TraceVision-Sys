@@ -264,7 +264,7 @@ export default function Forensics() {
                   )}
                 </div>
               )}
-            <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+            <input ref={fileInputRef} id="file-upload" name="file-upload" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} aria-label="上传图片" />
             {result && result.tamperedRegions.length === 0 && !result.isNoWatermark && (
               <div className="flex items-center gap-2 mt-3 text-[#10B981]"><CheckCircle className="w-4 h-4" /><span className="text-xs">未检测到明显篡改区域</span></div>
             )}
@@ -284,19 +284,19 @@ export default function Forensics() {
             <div className="grid grid-cols-3 gap-4">
               <div>
                 <label className="text-xs text-[#475569] mb-1.5 flex items-center gap-1">模型选择<HelpCircle className="w-3 h-3 text-[#94A3B8] cursor-help" /></label>
-                <select value={modelType} onChange={(e) => setModelType(e.target.value)} className="input-field">
+                <select id="model-select" name="model-select" value={modelType} onChange={(e) => setModelType(e.target.value)} className="input-field" aria-label="选择检测模型">
                   <option value="clean">Clean Model（clean.pth）</option>
                   <option value="degrade">Degrade Model（degrade.pth）</option>
                 </select>
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5"><label className="text-xs text-[#475569]">篡改检测灵敏度</label><span className="text-xs font-mono text-[#2563EB]">{threshold.toFixed(2)}</span></div>
-                <input type="range" min={0.05} max={0.5} step={0.05} value={threshold} onChange={(e) => setThreshold(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" />
+                <input id="sensitivity-slider" name="sensitivity-slider" type="range" min={0.05} max={0.5} step={0.05} value={threshold} onChange={(e) => setThreshold(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" aria-label="篡改检测灵敏度" />
                 <div className="text-[10px] text-[#94A3B8] mt-1">越低越敏感，可能误报</div>
               </div>
               <div>
                 <div className="flex items-center justify-between mb-1.5"><label className="text-xs text-[#475569]">最小连通区域（像素）</label><span className="text-xs font-mono text-[#2563EB]">{minArea}</span></div>
-                <input type="range" min={50} max={500} step={10} value={minArea} onChange={(e) => setMinArea(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" />
+                <input id="min-area-slider" name="min-area-slider" type="range" min={50} max={500} step={10} value={minArea} onChange={(e) => setMinArea(Number(e.target.value))} className="w-full h-1.5 bg-[#E2E8F0] rounded-full appearance-none accent-[#2563EB]" aria-label="最小连通区域" />
               </div>
             </div>
             {attackedFileName && (() => {
